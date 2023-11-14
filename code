@@ -1,0 +1,69 @@
+import pygame
+import random
+
+pygame.init()
+pygame.display.set_caption("turkey!")
+screen = pygame.display.set_mode((1000, 1000))
+
+class Turkey:
+    def __init__(self, xpos, ypos):
+        self.xpos = xpos
+        self.ypos = ypos
+        self.color = (random.randrange(100, 250),random.randrange(100, 250),random.randrange(100, 250))
+        
+    def draw(self):
+        
+        #feathers
+        pygame.draw.circle(screen, self.color, (590, 380), 70)
+        pygame.draw.circle(screen, self.color, (670, 470), 70)
+        pygame.draw.circle(screen, self.color, (400, 370), 70)
+        pygame.draw.circle(screen, self.color, (320, 470), 70)
+        pygame.draw.circle(screen, (110, 70, 200), (640, 390), 70)
+        pygame.draw.circle(screen, (110, 70, 200), (700, 550), 70)
+        pygame.draw.circle(screen, (110, 70, 200), (360, 390), 70)
+        pygame.draw.circle(screen, (110, 70, 200), (300, 550), 70)
+        
+        #legs
+        pygame.draw.rect(screen, (196, 180, 45), (400, 600, 50, 300))
+        pygame.draw.rect(screen, (196, 180, 45), (550, 600, 50, 300))
+        
+        
+        # body
+        pygame.draw.circle(screen, (110, 70, 0), (self.xpos, self.ypos), 200)
+        
+        #derpy little arms
+        pygame.draw.line(screen, (196, 180, 45), [549, 600], [649, 500], 5)
+        pygame.draw.line(screen, (196, 180, 45), [350, 500], [450, 600], 5)
+        
+        #head
+        pygame.draw.ellipse(screen, (110, 70, 0), (400, 170, 200, 300))
+        pygame.draw.ellipse(screen, (0, 0, 0), (400, 170, 200, 300), 2)
+        
+    
+        #beaks    
+        pygame.draw.polygon(screen, (196, 180, 45), ((450, 250), (550, 250), (500, 400)))
+        
+        #eyes
+        pygame.draw.circle(screen, (255, 255, 255), (450, 250), 40)
+        pygame.draw.circle(screen, (255, 255, 255), (550, 250), 40)
+        pygame.draw.circle(screen, (0, 0, 0), (450, 250), 30)
+        pygame.draw.circle(screen, (0, 0, 0), (550, 250), 30)
+        
+        
+turkey = []
+for i in range (2):
+    turkey.append(Turkey(500, 550))
+
+while(1):#game loop
+    screen.fill((0, 0, 0))
+    
+    for i in range (len(turkey)):
+        turkey[i].draw()
+    
+    
+    #notes:
+    #(110, 70, 0) and (0,0,0) are the colors. (110, 70, 0) is light brown and (0,0,0) is black
+    #in the first ellipse, (400, 150) is the top right corner. Then draw a rectangle thats 200 wide and 300 tall, and draw the oval in that
+    #in the second ellipse, notice the size is the same. the last extra optional parameter 2 tells us its an outline not a filled in shape!
+    
+    pygame.display.flip()
